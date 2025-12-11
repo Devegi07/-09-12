@@ -1,0 +1,14 @@
+name: Build Project
+
+on:
+  workflow_dispatch
+
+concurrency:
+  group: build-group   # Different group from deploy workflow
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Building project..."
