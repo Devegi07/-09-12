@@ -1,0 +1,36 @@
+name: Example Workflow with Inputs
+
+on:
+  workflow_dispatch:
+    inputs:
+      Run_Build:
+        description: 'Run the build step?'
+        required: true
+        default: 'true'
+      Run_Tests:
+        description: 'Run the test step?'
+        required: true
+        default: 'false'
+      Run_Deploy:
+        description: 'Run the deploy step?'
+        required: true
+        default: 'false'
+
+jobs:
+  example_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run Build Step
+        if: ${{ github.event.inputs.Run_Build == 'true' }}
+        run: echo "Building the project..."
+
+      - name: Run Test Step
+        if: ${{ github.event.inputs.Run_Tests == 'true' }}
+        run: echo "Running tests..."
+
+      - name: Run Deploy Step
+        if: ${{ github.event.inputs.Run_Deploy == 'true' }}
+        run: echo "Deploying the project..."
