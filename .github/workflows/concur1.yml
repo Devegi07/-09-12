@@ -1,0 +1,19 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - '*'  # Trigger on any branch push
+
+concurrency:
+  group: shared-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  build_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Build Message
+        run: echo "Building on branch ${{ github.ref_name }}"
+      - name: Sleep to simulate long build
+        run: sleep 60
