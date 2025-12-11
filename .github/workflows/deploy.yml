@@ -1,0 +1,14 @@
+name: Deploy App
+
+on:
+  workflow_dispatch
+
+concurrency:
+  group: deploy-group   # All runs of this workflow belong to SAME concurrency group
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying app..."
